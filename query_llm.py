@@ -5,7 +5,7 @@ from prompt_manager import get_operation_prompt
 from openai import OpenAI
 
 
-client = OpenAI(api_key="sk-44362539e3f940d0a0ea7ada01a9be12", base_url="https://api.deepseek.com/v1")
+client = OpenAI(api_key="", base_url="https://api.deepseek.com/v1")
 
 def query_deepseek(user_input, parsed_content, stream=True):
     """调用 deepseek-r1 让 AI 识别用户输入并找出目标（流式输出）"""
