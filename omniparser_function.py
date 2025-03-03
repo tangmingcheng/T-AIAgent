@@ -4,9 +4,7 @@ import base64
 import io
 import pyautogui
 from time import sleep
-import json
 import ast  # 用于解析字符串形式的字典
-import sys
 
 
 # 定义统一变量
@@ -144,50 +142,5 @@ def find_target_coordinates(icons):
                 return icon['bbox']
     return None
 
-
-
-
-if __name__ == "__main__":
-    # 主程序，解析传递过来的 model_response 并执行相应操作。
-    if len(sys.argv) < 2:
-        print("没有提供 model_response 参数")
-
-    # 获取传递过来的 model_response 字符串
-    model_response_str = sys.argv[1]
-
-    # 将字符串解析为 JSON
-    try:
-        model_response = json.loads(model_response_str)
-        update_target_icon(model_response)
-    except json.JSONDecodeError as e:
-        print(f"解析错误: {e}")
-
-    # 获取并打印屏幕分辨率
-    screen_width, screen_height = pyautogui.size()
-    print(f"当前屏幕分辨率: {screen_width}x{screen_height}")
-
-    image_path = r"D:\WallPaper\test.png"
-
-    result = process_image(
-        image_path=image_path,
-        box_threshold=0.05,
-        iou_threshold=0.1,
-        use_paddleocr=True,
-        imgsz=640
-    )
-
-    print(f"omniparser result:",result)
-
-    if result['status'] == 'success':
-        icons = parse_icon_data(result['parsed_content'])
-        target_bbox = find_target_coordinates(icons)
-
-        if target_bbox:
-            print(f"找到 {TARGET_ICON} 坐标:", target_bbox)
-            click_bbox(target_bbox)
-        else:
-            print(f"未找到 {TARGET_ICON} 图标")
-    else:
-        print("Error:", result['message'])
 
 

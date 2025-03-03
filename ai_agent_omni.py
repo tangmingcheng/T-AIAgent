@@ -40,7 +40,7 @@ def main():
     image_path = r"D:\WallPaper\test.png"
 
     # 1. 截屏
-    #capture_screen(image_path)
+    capture_screen(image_path)
 
     # 2. 调用 omniparser 处理截图
     print("等待 omniparser 解析...")
