@@ -1,3 +1,4 @@
+import os
 import requests
 import smtplib
 from email.message import EmailMessage
@@ -48,14 +49,54 @@ tools = [
 
         },
 
+
+    },
+    {
+        'type': 'function',
+        'function': {
+            'name': 'get_current_time',
+            'description': "Get the real time of the current user's timezone.",
+            'parameters': {
+                'type': 'object',
+                'properties': {},
+                'required': [],
+            },
+
+        },
+
+    },
+{
+        'type': 'function',
+        'function': {
+            'name': 'execute_ui',
+            'description': 'Executes UI automation tasks by analyzing the screen and clicking on target elements based on user commands.',
+            'parameters': {
+                'type': 'object',
+                'properties': {
+                    'user_input': {
+                        'type': 'string',
+                        'description': "The user's operation instruction, such as 'Click on the recycle bin icon'."
+                    },
+                    'image_path': {
+                        'type': 'string',
+                        'description': "Path to the screenshot file used for UI analysis. Default: 'D:\\WallPaper\\test.png'.",
+                        'default': 'D:\\WallPaper\\test.png'
+                    },
+                },
+                'required': ['user_input'],
+            },
+
+        },
+
+
     },
 ]
 
 
 
 # Google Search API 配置（若需要使用Google搜索）
-GOOGLE_API_KEY = ''  # Google API Key
-GOOGLE_CX = ''      # Google search engine ID
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')  # Google API Key
+GOOGLE_CX = os.getenv('GOOGLE_CX')      # Google search engine ID
 GOOGLE_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
 
 def google_search(query):
@@ -92,8 +133,8 @@ def google_search(query):
 # 配置你的 SMTP 服务器信息
 SMTP_SERVER = "smtp.gmail.com"  # 如果是QQ邮箱，请改为 smtp.qq.com
 SMTP_PORT = 465
-SMTP_USER = ''  # Gmail
-SMTP_PASS = ''     # googl app password
+SMTP_USER = os.getenv('SMTP_USER')  # Gmail
+SMTP_PASS = os.getenv('SMTP_PASS')     # googl app password
 
 def send_email(to: str, subject: str, body: str) -> str:
     """通过SMTP发送邮件，返回发送结果字符串。"""
@@ -116,6 +157,13 @@ def send_email(to: str, subject: str, body: str) -> str:
         return f"❌ 邮件发送失败: {e}"
 
 
+def get_current_time():
+    from datetime import datetime
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
 def nop(reason: str) -> str:
     """无操作函数：直接返回传入的reason文本。"""
     return reason
+
+

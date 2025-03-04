@@ -35,12 +35,9 @@ def save_screenshot(screenshot, image_path):
     print(f"屏幕截图已保存至: {image_path}")
 
 
-def main():
-    user_input = input("请输入操作指令（例如，点击回收站图标）：")
-    image_path = r"D:\WallPaper\test.png"
-
+def execute_ui(user_input: str, image_path: str = "D:\\WallPaper\\test.png"):
     # 1. 截屏
-    capture_screen(image_path)
+    #capture_screen(image_path)
 
     # 2. 调用 omniparser 处理截图
     print("等待 omniparser 解析...")
@@ -57,7 +54,7 @@ def main():
 
     if parsed_result['status'] != 'success':
         print("Omniparser 解析失败:", parsed_result['message'])
-        return
+        return 'Failed to execute the operation.'
 
     # 3. 结合用户输入，调用 deepseek-r1 推理
     print("调用 deepseek-r1 获取目标信息...")
@@ -68,11 +65,14 @@ def main():
         print("AI 推理目标:", target_data)
         # 提取 bbox 字段
         bbox = target_data['bbox']
-
         click_bbox(bbox)
+        return 'Success to execute the operation'
     else:
         print("未能解析到有效的目标数据")
+        return 'Failed to execute the operation due to the target was not found.'
 
 
 if __name__ == "__main__":
-    main()
+    user_input = input("请输入操作指令（例如，点击回收站图标）：")
+    result = execute_ui(user_input)
+    print(result)
