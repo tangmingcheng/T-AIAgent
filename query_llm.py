@@ -1,11 +1,13 @@
 import json
 import re
+import os
 import requests
 from prompt_manager import get_operation_prompt
 from openai import OpenAI
 
 
-client = OpenAI(api_key="", base_url="https://api.deepseek.com/v1")
+DeepSeek_API_KEY = os.getenv('DeepSeek_API_KEY')
+client = OpenAI(api_key=DeepSeek_API_KEY, base_url="https://api.deepseek.com/v1")
 
 def query_deepseek(user_input, parsed_content, stream=True):
     """调用 deepseek-r1 让 AI 识别用户输入并找出目标（流式输出）"""
