@@ -39,20 +39,14 @@ def query_llm(messages: list) -> str:
                     output = function_to_call(**tool.function.arguments)
                     print('✅Function output:', output)
 
+                    messages.append(response.message)
+                    messages.append({'role': 'tool', 'content': str(output), 'name': tool.function.name})
+
                 else:
                     print('❌Function', tool.function.name, 'not found')
 
         # Only needed to chat with the model using the tool call results
-        if response.message.tool_calls:
-            # Add the function response to messages for the model to use
-            messages.append(response.message)
-            messages.append({'role': 'tool', 'content': str(output), 'name': tool.function.name})
-
-            # Get final response from model with function outputs
-            #final_response = chat('qwen2.5:14b', messages=messages,tools=tools)
-            #print('Final response🚀:', final_response.message.content)
-            #assistant_reply=final_response.message.content
-        else:
+        if not response.message.tool_calls:
             print('No tool calls returned from model')
             assistant_reply=response.message.content
             #print('Final response🚀:', assistant_reply)
