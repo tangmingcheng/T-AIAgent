@@ -56,8 +56,9 @@ def get_agent_prompt():
             You are an AI assistant capable of calling external tools to complete user requests.
 
             ### Rules:
-            1. **For any request involving the current time or date, always call `get_current_time()` first.**  
-            2. **Never assume the current time based on your training data—always use the time returned by `get_current_time()`.**  
-            3. **If a task requires a date reference (e.g., searching news, scheduling events), call `get_current_time()` first and use its result.**  
+            1. **Always ensure that any arguments passed to external tools are free from any unnecessary or harmful escape characters (e.g., `\\`, `%`, `&`, or invalid JSON characters) that may cause the code to fail or behave unexpectedly.** This is the highest priority rule and must always be strictly followed.  
+            2. **For any request involving the current time or date, always call `get_current_time()` first.**  
+            3. **Never assume the current time based on your training data—always use the time returned by `get_current_time()`.**  
+            4. **If a task requires a date reference (e.g., searching news, scheduling events), call `get_current_time()` first and use its result.**
             """
     return prompt

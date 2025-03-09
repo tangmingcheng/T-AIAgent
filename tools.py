@@ -31,17 +31,17 @@ tools = [
             'parameters': {
                 'type': 'object',
                 'properties': {
-                    "to": {
-                        "type": "string",
-                        "description": "The recipient's email address."
+                    'to': {
+                        'type': 'string',
+                        'description': "The recipient's email address."
                     },
-                    "subject": {
-                        "type": "string",
-                        "description": "Email subject"
+                    'subject': {
+                        "type": 'string',
+                        'description': 'Email subject'
                     },
-                    "body": {
-                        "type": "string",
-                        "description": "The content of the body of the email."
+                    'body': {
+                        'type': 'string',
+                        'description': "The content of the body of the email."
                     }
                 },
                 'required': ['to', 'subject', 'body'],
@@ -58,14 +58,20 @@ tools = [
             'description': "Get the real time of the current user's timezone.",
             'parameters': {
                 'type': 'object',
-                'properties': {},
-                'required': [],
+                'properties': {
+                    'format': {
+                        'type': 'string',
+                        'description': "The format of time.eg:'date-time' or 'date' or 'time'",
+                    },
+                },
+                'required': ['format'],
+
             },
 
         },
 
     },
-{
+    {
         'type': 'function',
         'function': {
             'name': 'execute_ui',
@@ -157,7 +163,7 @@ def send_email(to: str, subject: str, body: str) -> str:
         return f"❌ 邮件发送失败: {e}"
 
 
-def get_current_time():
+def get_current_time(format):
     from datetime import datetime
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
