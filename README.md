@@ -1,2 +1,2 @@
 # T-AIAgent
-Automated AI Agent Project for Image Processing based on Omniparser V2
+Automated AI Agent Project  based on Omniparser V2 , ollama and groq
