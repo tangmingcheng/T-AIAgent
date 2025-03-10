@@ -58,7 +58,7 @@ T-AIAgent provides both an interactive CLI and a web interface:
 ```bash
 streamlit run  app.py
 ```
-Then access `http://localhost:5361` to interact with the system.
+Then access `http://localhost:8501` to interact with the system.
 
 ## Future Plans
 - Enhance RAG capabilities and document retrieval optimization.
