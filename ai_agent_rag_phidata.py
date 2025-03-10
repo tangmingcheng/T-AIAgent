@@ -1,13 +1,12 @@
 from phi.knowledge.pdf import PDFKnowledgeBase
 from phi.vectordb.pgvector import PgVector, SearchType
 from phi.embedder.ollama import OllamaEmbedder
-from phi.llm.ollama import Ollama
 from phi.assistant import Assistant
-
-from groq_llm import GroqLLM
+from phi.llm.groq import Groq
+from groq_phidata import GroqLLM
 
 # Configure the language model
-llm = GroqLLM(model="qwen-qwq-32b")
+llm = Groq(model="qwen-qwq-32b")
 
 # Configure embedder model
 embedder = OllamaEmbedder(model="nomic-embed-text", dimensions=768)
@@ -47,7 +46,7 @@ assistant = Assistant(
     show_tool_calls=True,
     search_knowledge=True,
     add_references_to_prompt=True,  # Use traditional RAG (Retrieval-Augmented Generation)
-    debug_mode=True,  # Enable debug mode for additional information
+    debug_mode=False,  # Enable debug mode for additional information
 
 )
 

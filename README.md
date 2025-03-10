@@ -39,7 +39,7 @@ cd T-AIAgent
 pip install -r requirements.txt
 
 # Run the AI Agent example
-python ai_agent_rag.py
+python ai_agent_rag_phidata.py
 ```
 
 ## Configuration
