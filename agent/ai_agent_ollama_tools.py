@@ -2,7 +2,7 @@ import ollama
 import json
 from ai_agent_omni import execute_ui
 from prompt_manager import get_agent_prompt
-from tools import tools, google_search, send_email, get_current_time
+from tools.tools import tools, google_search, send_email, get_current_time
 
 # 生成格式化后的 JSON 工具列表
 tools_json = json.dumps(tools, indent=2, ensure_ascii=False)

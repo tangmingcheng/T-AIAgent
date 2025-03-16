@@ -1,12 +1,13 @@
 import os
 from groq import Groq
+#from groq_mock import Groq
 import json
 from ai_agent_omni import execute_ui
 from prompt_manager import get_agent_prompt
-from tools import tools, google_search, send_email, get_current_time
+from tools.tools import tools, google_search, send_email, get_current_time
 
 # Initialize Groq client (using your provided API key)
-client = Groq(api_key=os.getenv('GROQ_API_KEY'))
+client = Groq(api_key=os.getenv('GROQ_API_KEY'),timeout=60)
 
 # 生成格式化后的 JSON 工具列表
 tools_json = json.dumps(tools, indent=2, ensure_ascii=False)
@@ -19,7 +20,7 @@ available_functions = {
 }
 
 
-def query_llm(messages: list) -> str:
+def query_groq(messages: list) -> str:
     """Call Groq API to get LLM response for the given conversation messages."""
     while True:
         try:
@@ -121,7 +122,7 @@ def agent_respond(messages: list):
             break
 
         messages.append({'role': 'user', 'content': user_input})
-        assistant_reply = query_llm(messages)
+        assistant_reply = query_groq(messages)
 
         if assistant_reply:
             print(f'\n🤖 AI: {assistant_reply}\n')

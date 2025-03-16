@@ -3,7 +3,6 @@ from phi.vectordb.pgvector import PgVector, SearchType
 from phi.embedder.ollama import OllamaEmbedder
 from phi.assistant import Assistant
 from phi.llm.groq import Groq
-from groq_phidata import GroqLLM
 
 # Configure the language model
 llm = Groq(model="qwen-qwq-32b")

@@ -1,5 +1,5 @@
 import streamlit as st
-from ai_agent_groq_tools import query_llm
+from agent.ai_agent_groq_tools import query_groq
 from prompt_manager import get_agent_prompt
 
 # 初始化Streamlit页面配置
@@ -28,7 +28,7 @@ if user_input := st.chat_input("请输入你的问题..."):
 
     # 调用ai_agent_ollama_tools获取响应
     with st.spinner('AI正在思考中...'):
-        assistant_reply = query_llm(st.session_state.messages)
+        assistant_reply = query_groq(st.session_state.messages)
 
     assistant_reply = assistant_reply.strip()
     if assistant_reply:

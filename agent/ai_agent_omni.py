@@ -4,7 +4,7 @@ import pyautogui
 import tkinter as tk
 import threading
 from omniparser_function import click_bbox, process_image
-from query_llm import query_deepseek
+from models.query_llm import query_deepseek
 
 
 def get_dpi():
