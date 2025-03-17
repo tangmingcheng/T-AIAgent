@@ -1,6 +1,6 @@
 # T-AIAgent
 
-T-AIAgent is a powerful AI Agent built on Ollama, Phidata, Groq, and Omniparser v2. It features a Retrieval-Augmented Generation (RAG) system, tool calling capabilities, and the ability to directly operate a computer through image parsing.
+T-AIAgent is a powerful AI Agent built on Ollama, Agno, Groq, and Omniparser v2. It features a Retrieval-Augmented Generation (RAG) system, tool calling capabilities, and the ability to directly operate a computer through image parsing.
 
 ## Features
 
@@ -39,7 +39,7 @@ cd T-AIAgent
 pip install -r requirements.txt
 
 # Run the AI Agent example
-python ai_agent_rag_phidata.py
+python -m agent.ai_agent_task
 ```
 
 ## Configuration

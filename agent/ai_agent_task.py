@@ -3,32 +3,110 @@ import json
 import re
 import time
 from agno.agent import Agent, RunResponse
+from agno.document.reader.pdf_reader import PDFReader
+from agno.embedder.ollama import OllamaEmbedder
 from agno.models.groq import Groq
-from agno.storage.postgres import PostgresStorage
+from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
 from agno.tools.pandas import PandasTools
 from agno.tools.website import WebsiteTools
 from agno.tools.gmail import GmailTools
 
-# 代理服务器（Clash/V2Ray/Trojan 端口）
+from agno.knowledge.combined import CombinedKnowledgeBase
+from agno.vectordb.pgvector import PgVector
+from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
+from agno.knowledge.website import WebsiteKnowledgeBase
+from agno.knowledge.pdf import PDFKnowledgeBase
+from agno.vectordb.search import SearchType
+
+from config.config import TOKEN_PATH
+from config.config import CREDENTIALS_PATH
+from config.config import DB_PATH
+
+# Proxy Server（Clash/V2Ray/Trojan port）
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
 os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 
 #task ="send email to 18340825516@163.com,subject:test google body:test"
-#task ="Check out the latest emails in my gmail mailbox"
+#task ="Check out the latest email in my gmail mailbox"
 #task ="What's the market outlook and financial performance of AI semiconductor companies? Then send email to .com"
-task ="I want to check the latest news on GTA6 and then send the collected information by email to .com"
+#task ="I want to check the latest news on GTA6 and then send the collected information by email to 18340825516@163.com"
 #task ="Take a look at https://ollama.com/"
 #task ="I want to check the latest news on GTA6 and then repeat our previous conversation: "
-#task ="回顾一下我们之间的聊天记录"
+#task ="Let's review our chat history"
+task = "I would like to know what the knowledge base generally contains"
 
 db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
-storage = PostgresStorage(table_name="agent_sessions", db_url=db_url)
 
+# Create a storage backend using the Sqlite database
+storage = SqliteAgentStorage(
+    # store sessions in the ai.sessions table
+    table_name="agent_sessions",
+    # db_file: Sqlite database file
+    db_file=DB_PATH,
+)
+# Create Groq model
+model=Groq(id='qwen-qwq-32b',timeout=60)
+
+# Create Ollama embedder
+embedder = OllamaEmbedder(id="nomic-embed-text", dimensions=768)
+
+# Create knowledge  base
+url_pdf_knowledge_base = PDFUrlKnowledgeBase(
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    # Table name: ai.pdf_documents
+    vector_db=PgVector(
+        table_name="pdf_documents",
+        db_url=db_url,
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
+website_knowledge_base = WebsiteKnowledgeBase(
+    urls=["https://docs.agno.com/introduction"],
+    # Number of links to follow from the seed URLs
+    max_links=10,
+    # Table name: ai.website_documents
+    vector_db=PgVector(
+        table_name="website_documents",
+        db_url=db_url,
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
+local_pdf_knowledge_base = PDFKnowledgeBase(
+    path="D:/Chrome/Downloads/ThaiRecipes.pdf",
+    # Table name: ai.pdf_documents
+    vector_db=PgVector(
+        table_name="pdf_documents",
+        db_url=db_url,
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+    reader=PDFReader(chunk=True),
+)
+
+knowledge_base = CombinedKnowledgeBase(
+    sources=[
+        url_pdf_knowledge_base,
+        website_knowledge_base,
+        local_pdf_knowledge_base,
+    ],
+    vector_db=PgVector(
+        # Table name: ai.combined_documents
+        table_name="combined_documents",
+        db_url=db_url,
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+# Set GmailTools
 gmail_tools=GmailTools(
-        credentials_path="credentials.json",
-        token_path="token.json",
+        credentials_path=CREDENTIALS_PATH,
+        token_path=TOKEN_PATH,
         get_latest_emails=True,
         get_emails_from_user=True,
         get_unread_emails=True,
@@ -41,9 +119,6 @@ gmail_tools=GmailTools(
         send_email_reply=True,
         search_emails=True
     )
-
-# Create Groq model
-model=Groq(id='qwen-qwq-32b',timeout=60)
 
 # Create reasoning agent
 reason_agent = Agent(
@@ -63,8 +138,8 @@ reason_agent = Agent(
     markdown=True,
 )
 
-# Create tools agent
-agent = Agent(
+# Create implement agent
+implement_agent = Agent(
     model=model,
     tools=[gmail_tools,DuckDuckGoTools(),WebsiteTools(),
            YFinanceTools(stock_price=True,historical_prices=True,analyst_recommendations=True, company_info=True),
@@ -80,14 +155,21 @@ agent = Agent(
         "You can use PandasTools to perform statistical calculations if a set of numbers is provided",
         "Use tables to display data"
     ],
-
+    #session_id="af42045d-e836-4257-bca6-dddef6a52119",
     storage=storage,
     add_history_to_messages=True,
+    num_history_responses=10,
+    knowledge=knowledge_base,
+    search_knowledge=True,
     show_tool_calls=True,
     markdown=True,
     debug_mode= True,
     add_datetime_to_instructions=True,
 )
+
+# Comment out after the knowledge base is loaded
+if implement_agent.knowledge is not None:
+    implement_agent.knowledge.load(recreate=True)
 
 
 # Extract json from agent response
@@ -171,5 +253,5 @@ else:
 
 
 # **执行任务**
-executor = TaskExecutor(agent)
+executor = TaskExecutor(implement_agent)
 executor.execute(task_list)

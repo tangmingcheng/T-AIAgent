@@ -10,6 +10,8 @@ from agno.tools.yfinance import YFinanceTools
 from agno.tools.pandas import PandasTools
 from agno.tools.website import WebsiteTools
 from agno.tools.gmail import GmailTools
+from config.config import TOKEN_PATH
+from config.config import CREDENTIALS_PATH
 
 # 代理服务器（Clash/V2Ray/Trojan 端口）
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
@@ -27,8 +29,8 @@ db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 storage = PostgresStorage(table_name="agent_sessions", db_url=db_url)
 
 gmail_tools=GmailTools(
-        credentials_path="credentials.json",
-        token_path="token.json",
+        credentials_path=CREDENTIALS_PATH,
+        token_path=TOKEN_PATH,
         get_latest_emails=True,
         get_emails_from_user=True,
         get_unread_emails=True,
