@@ -12,6 +12,7 @@ from agno.tools.yfinance import YFinanceTools
 from agno.tools.pandas import PandasTools
 from agno.tools.website import WebsiteTools
 from agno.tools.gmail import GmailTools
+from agno.tools.file import FileTools
 
 from agno.knowledge.combined import CombinedKnowledgeBase
 from agno.vectordb.pgvector import PgVector
@@ -20,7 +21,7 @@ from agno.knowledge.website import WebsiteKnowledgeBase
 from agno.knowledge.pdf import PDFKnowledgeBase
 from agno.vectordb.search import SearchType
 
-from config.config import TOKEN_PATH
+from config.config import TOKEN_PATH, DOWNLOAD_DIR
 from config.config import CREDENTIALS_PATH
 from config.config import DB_PATH
 
@@ -35,7 +36,9 @@ os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 #task ="Take a look at https://ollama.com/"
 #task ="I want to check the latest news on GTA6 and then repeat our previous conversation: "
 #task ="Let's review our chat history"
-task = "I would like to know what the knowledge base generally contains"
+#task = "I would like to know what the knowledge base generally contains"
+#task ="I want to check the latest news on GTA6 and then send the collected information by email to 18340825516@163.com,then tell me something about ThaiRecipes.pdf"
+task = "Search web page: 'https://api-docs.deepseek.com/zh-cn/guides/function_calling',and then write the content to a local file"
 
 db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 
@@ -65,8 +68,9 @@ url_pdf_knowledge_base = PDFUrlKnowledgeBase(
 )
 
 website_knowledge_base = WebsiteKnowledgeBase(
-    urls=["https://docs.agno.com/introduction"],
     # Number of links to follow from the seed URLs
+    urls=["https://api-docs.deepseek.com/zh-cn/guides/function_calling"],
+    max_depth = 10,
     max_links=10,
     # Table name: ai.website_documents
     vector_db=PgVector(
@@ -141,9 +145,11 @@ reason_agent = Agent(
 # Create implement agent
 implement_agent = Agent(
     model=model,
-    tools=[gmail_tools,DuckDuckGoTools(),WebsiteTools(),
+    tools=[gmail_tools,DuckDuckGoTools(),
+           WebsiteTools(knowledge_base=website_knowledge_base),
            YFinanceTools(stock_price=True,historical_prices=True,analyst_recommendations=True, company_info=True),
-           PandasTools()
+           PandasTools(),
+           FileTools(base_dir=DOWNLOAD_DIR),
     ],
 
     instructions=[
@@ -153,6 +159,7 @@ implement_agent = Agent(
         "when you use DuckDuckGoTools,you should always include sources",
         "You can use YFinanceTools to obtain data (current price or historical price) for a specified stock",
         "You can use PandasTools to perform statistical calculations if a set of numbers is provided",
+        "You can use FileTools to read and write files on the local file system",
         "Use tables to display data"
     ],
     #session_id="af42045d-e836-4257-bca6-dddef6a52119",
@@ -160,6 +167,7 @@ implement_agent = Agent(
     add_history_to_messages=True,
     num_history_responses=10,
     knowledge=knowledge_base,
+    update_knowledge=True,
     search_knowledge=True,
     show_tool_calls=True,
     markdown=True,
