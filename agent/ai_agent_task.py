@@ -10,7 +10,7 @@ from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
 from agno.tools.pandas import PandasTools
-from agno.tools.website import WebsiteTools
+from tools.websitetools import WebsiteTools
 from agno.tools.gmail import GmailTools
 from agno.tools.file import FileTools
 
@@ -38,13 +38,12 @@ os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 #task ="Let's review our chat history"
 #task = "I would like to know what the knowledge base generally contains"
 #task ="I want to check the latest news on GTA6 and then send the collected information by email to 18340825516@163.com,then tell me something about ThaiRecipes.pdf"
-task = "Search web page: 'https://api-docs.deepseek.com/zh-cn/guides/function_calling',and then write the content to a local file"
+task = "Search web page:'https://api-docs.deepseek.com/zh-cn/guides/function_calling' ,and then write the detailed content to a local file,the file format is md and encode utf-8"
 
 db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 
 # Create a storage backend using the Sqlite database
 storage = SqliteAgentStorage(
-    # store sessions in the ai.sessions table
     table_name="agent_sessions",
     # db_file: Sqlite database file
     db_file=DB_PATH,
@@ -58,7 +57,7 @@ embedder = OllamaEmbedder(id="nomic-embed-text", dimensions=768)
 # Create knowledge  base
 url_pdf_knowledge_base = PDFUrlKnowledgeBase(
     urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
-    # Table name: ai.pdf_documents
+
     vector_db=PgVector(
         table_name="pdf_documents",
         db_url=db_url,
@@ -69,10 +68,10 @@ url_pdf_knowledge_base = PDFUrlKnowledgeBase(
 
 website_knowledge_base = WebsiteKnowledgeBase(
     # Number of links to follow from the seed URLs
-    urls=["https://api-docs.deepseek.com/zh-cn/guides/function_calling"],
-    max_depth = 10,
-    max_links=10,
-    # Table name: ai.website_documents
+    urls=["https://docs.agno.com/tools/toolkits/website"],
+    max_depth = 1,
+    max_links=1,
+
     vector_db=PgVector(
         table_name="website_documents",
         db_url=db_url,
@@ -83,7 +82,7 @@ website_knowledge_base = WebsiteKnowledgeBase(
 
 local_pdf_knowledge_base = PDFKnowledgeBase(
     path="D:/Chrome/Downloads/ThaiRecipes.pdf",
-    # Table name: ai.pdf_documents
+
     vector_db=PgVector(
         table_name="pdf_documents",
         db_url=db_url,
@@ -100,7 +99,6 @@ knowledge_base = CombinedKnowledgeBase(
         local_pdf_knowledge_base,
     ],
     vector_db=PgVector(
-        # Table name: ai.combined_documents
         table_name="combined_documents",
         db_url=db_url,
         search_type=SearchType.hybrid,
@@ -146,7 +144,7 @@ reason_agent = Agent(
 implement_agent = Agent(
     model=model,
     tools=[gmail_tools,DuckDuckGoTools(),
-           WebsiteTools(knowledge_base=website_knowledge_base),
+           WebsiteTools(knowledge_base=website_knowledge_base,combined_knowledge_base=knowledge_base),
            YFinanceTools(stock_price=True,historical_prices=True,analyst_recommendations=True, company_info=True),
            PandasTools(),
            FileTools(base_dir=DOWNLOAD_DIR),
@@ -177,7 +175,7 @@ implement_agent = Agent(
 
 # Comment out after the knowledge base is loaded
 if implement_agent.knowledge is not None:
-    implement_agent.knowledge.load(recreate=True)
+    implement_agent.knowledge.load(recreate=True,upsert=True)
 
 
 # Extract json from agent response
@@ -190,7 +188,7 @@ def extract_json_from_run_response(response: RunResponse):
         return None
 
     # **使用正则表达式查找 JSON 代码块**
-    json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', response.content)
+    json_match = re.search(r'\{[\s\S]*}|\[[\s\S]*]', response.content)
 
     if json_match:
         json_data = json_match.group(0).strip()
