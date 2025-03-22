@@ -15,5 +15,5 @@ CREDENTIALS_PATH = os.path.join(CONFIG_DIR, "credentials.json")
 DB_PATH = os.path.join(CONFIG_DIR, "agent_sessions.db")
 
 DOWNLOAD_DIR = Path(__file__).parent.parent / "tmp"
-print(DOWNLOAD_DIR)
+
 

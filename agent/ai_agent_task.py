@@ -230,7 +230,7 @@ class TaskExecutor:
                         break  # 步骤成功，跳出重试循环
                     except Exception as e:
                         retry_count += 1
-                        print(f"❌ 步骤 {step_index} 执行失败, 尝试 {retry_count}/{self.max_retries} 次")
+                        print(f"❌ 步骤 {step_index} 执行失败,失败原因：{e}, 尝试 {retry_count}/{self.max_retries} 次")
                         if retry_count == self.max_retries:
                             print(f"❌ 步骤 {step_index} 执行失败 {self.max_retries} 次，跳过该步骤")
                             break  # 超过最大重试次数，跳过当前步骤
