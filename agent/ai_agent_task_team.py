@@ -7,19 +7,20 @@ from agno.tools.gmail import GmailTools
 from agno.tools.yfinance import YFinanceTools
 
 from agent.team import Team
-from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_PATH
+from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH
 
 # Proxy Server（Clash/V2Ray/Trojan port）
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
 os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 
-task ="Check the latest news on GTA6 and then send the collected information by email to 18340825516@163.com"
+task ="Check the latest news on PS5 and then send the collected information by email to 18340825516@163.com"
 
 # Create a storage backend using the Sqlite database
 storage = SqliteAgentStorage(
-    table_name="agent_sessions",
+    table_name="agent_team_sessions",
     # db_file: Sqlite database file
-    db_file=DB_PATH,
+    db_file=DB_TEAM_PATH,
+    mode="team"
 )
 
 # Create Groq model
@@ -77,7 +78,7 @@ email_agent = Agent(
 
 agent_team = Team(
     members=[web_agent, finance_agent,email_agent],
-    name="Content Team",
+    name="Multitasking Team",
     mode="coordinate",
     model=model,
     instructions=[

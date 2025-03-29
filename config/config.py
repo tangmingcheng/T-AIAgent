@@ -13,6 +13,7 @@ CREDENTIALS_PATH = os.path.join(CONFIG_DIR, "credentials.json")
 
 # SQLite path
 DB_PATH = os.path.join(CONFIG_DIR, "agent_sessions.db")
+DB_TEAM_PATH = os.path.join(CONFIG_DIR, "agent_team_sessions.db")
 
 DOWNLOAD_DIR = Path(__file__).parent.parent / "tmp"
 
