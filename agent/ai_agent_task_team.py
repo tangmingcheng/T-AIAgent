@@ -1,5 +1,14 @@
 import os
 from agno.agent import Agent
+from agno.knowledge.combined import CombinedKnowledgeBase
+from agno.vectordb.pgvector import PgVector
+from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
+from agno.knowledge.website import WebsiteKnowledgeBase
+from agno.knowledge.pdf import PDFKnowledgeBase
+from agno.document.reader.pdf_reader import PDFReader
+from agno.embedder.ollama import OllamaEmbedder
+from agno.vectordb.search import SearchType
+
 from agno.models.groq import Groq
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.storage.agent.sqlite import SqliteAgentStorage
@@ -13,7 +22,8 @@ from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
 os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 
-task ="Check the latest news on PS5 and then send the collected information by email to 18340825516@163.com"
+#task ="Check the latest news on PS5 and then send the collected information by email to 18340825516@163.com"
+task = "Tell me something about ThaiRecipes.pdf "
 
 # Create a storage backend using the Sqlite database
 storage = SqliteAgentStorage(
@@ -42,6 +52,54 @@ gmail_tools=GmailTools(
         send_email_reply=True,
         search_emails=True,
 )
+
+# 初始化嵌入器
+embedder = OllamaEmbedder(id="nomic-embed-text", dimensions=768)
+
+# 构建知识库
+url_pdf_knowledge_base = PDFUrlKnowledgeBase(
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    vector_db=PgVector(
+        table_name="pdf_documents",
+        db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
+website_knowledge_base = WebsiteKnowledgeBase(
+    urls=["https://docs.agno.com/tools/toolkits/website"],
+    max_depth=1,
+    max_links=1,
+    vector_db=PgVector(
+        table_name="website_documents",
+        db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
+local_pdf_knowledge_base = PDFKnowledgeBase(
+    path="D:/Chrome/Downloads/ThaiRecipes.pdf",
+    reader=PDFReader(chunk=True),
+    vector_db=PgVector(
+        table_name="pdf_documents",
+        db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
+knowledge_base = CombinedKnowledgeBase(
+    sources=[url_pdf_knowledge_base, website_knowledge_base, local_pdf_knowledge_base],
+    vector_db=PgVector(
+        table_name="combined_documents",
+        db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
+        search_type=SearchType.hybrid,
+        embedder=embedder,
+    ),
+)
+
 
 web_agent = Agent(
     name="Web Agent",
@@ -76,8 +134,26 @@ email_agent = Agent(
     markdown=True,
 )
 
+knowledge_agent = Agent(
+    name="Knowledge Agent",
+    role="Responsible for querying the knowledge base and returning relevant content",
+    model=model,
+    tools=[],
+    instructions=[
+        "You are responsible for querying and retrieving information from the knowledge base.",
+        "Use the provided knowledge base to answer questions or provide detailed information.",
+        "If the requested information is not in the knowledge base, inform the user and suggest expanding the knowledge base.",
+        "Present information in a clear and structured manner, using markdown formatting.",
+    ],
+    knowledge=knowledge_base,  # 绑定组合知识库
+    update_knowledge=False,    # 只查询，不更新
+    search_knowledge=True,     # 启用知识库搜索
+    show_tool_calls=True,
+    markdown=True,
+)
+
 agent_team = Team(
-    members=[web_agent, finance_agent,email_agent],
+    members=[web_agent, finance_agent,email_agent,knowledge_agent],
     name="Multitasking Team",
     mode="coordinate",
     model=model,
@@ -96,5 +172,8 @@ agent_team = Team(
     num_of_interactions_from_history=5,
     add_datetime_to_instructions=True,
 )
+
+if knowledge_agent.knowledge is not None:
+    knowledge_agent.knowledge.load(recreate=True, upsert=True)
 
 agent_team.print_response(task, stream=True)
