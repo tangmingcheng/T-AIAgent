@@ -10,7 +10,7 @@ from agno.embedder.ollama import OllamaEmbedder
 from agno.vectordb.search import SearchType
 
 from agno.models.groq import Groq
-from agno.models.ollama import Ollama
+
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.gmail import GmailTools
@@ -35,8 +35,8 @@ storage = SqliteAgentStorage(
 )
 
 # Create Groq model
-#model=Groq(id='qwen-qwq-32b',timeout=60)
-model=Ollama(id='qwen2.5:14b')
+model=Groq(id='qwen-qwq-32b',timeout=60)
+
 
 # Set GmailTools
 gmail_tools=GmailTools(
@@ -108,7 +108,11 @@ web_agent = Agent(
     role="Search the web for information",
     model=model,
     tools=[DuckDuckGoTools()],
-    instructions="Always include sources",
+    instructions=[
+        "Always include sources",
+        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
+        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
+    ],
     show_tool_calls=True,
     markdown=True,
     debug_mode=True,
@@ -133,6 +137,9 @@ email_agent = Agent(
     instructions=[
         "You can use GmailTools to perform email operations",
         "You can read the latest emails, unread emails, search emails, send emails, create drafts, and reply to emails",
+        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
+        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
+
     ],
     show_tool_calls=True,
     markdown=True,
@@ -149,6 +156,8 @@ knowledge_agent = Agent(
         "Use the provided knowledge base to answer questions or provide detailed information.",
         "If the requested information is not in the knowledge base, inform the user and suggest expanding the knowledge base.",
         "Present information in a clear and structured manner, using markdown formatting.",
+        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
+        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
     ],
     knowledge=knowledge_base,  # 绑定组合知识库
     update_knowledge=False,    # 只查询，不更新
@@ -167,7 +176,9 @@ agent_team = Team(
         "Analyze the user's input and break it down into simple steps based on natural language logic.",
         "Do not modify the user's input, simply divide it into distinct tasks as they are presented in the original request.",
         "Each task should correspond to one action mentioned in the user's input, and each action should be a single step.",
-        "Ensure the steps are logically ordered and easy to follow."
+        "Ensure the steps are logically ordered and easy to follow.",
+        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
+        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
     ],
     show_members_responses=True,
     show_tool_calls=True,
