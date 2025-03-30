@@ -1,6 +1,7 @@
 import os
 from agno.agent import Agent
 from agno.knowledge.combined import CombinedKnowledgeBase
+from agno.tools.file import FileTools
 from agno.vectordb.pgvector import PgVector
 from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
 from agno.knowledge.website import WebsiteKnowledgeBase
@@ -17,7 +18,7 @@ from agno.tools.gmail import GmailTools
 from agno.tools.yfinance import YFinanceTools
 
 from agent.team import Team
-from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH
+from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH, DOWNLOAD_DIR
 
 # Proxy Server（Clash/V2Ray/Trojan port）
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
@@ -167,8 +168,23 @@ knowledge_agent = Agent(
     debug_mode=True,
 )
 
+file_agent = Agent(
+    name="File Agent",
+    role="Responsible for local files management",
+    model=model,
+    tools=[FileTools(base_dir=DOWNLOAD_DIR),
+    ],
+
+    instructions=[
+        "You can use FileTools to read and write files on the local file system",
+    ],
+    show_tool_calls=True,
+    markdown=True,
+    debug_mode= True,
+)
+
 agent_team = Team(
-    members=[web_agent, finance_agent,email_agent,knowledge_agent],
+    members=[web_agent, finance_agent,email_agent,knowledge_agent,file_agent],
     name="Multitasking Team",
     mode="coordinate",
     model=model,
