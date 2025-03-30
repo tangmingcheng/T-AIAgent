@@ -3848,6 +3848,7 @@ class Team:
                 "  - agent_name (str): The name of the Agent to transfer the task to.\n"
                 "  - task_description (str): A clear description of the task.\n"
                 "  - expected_output (str): The expected output.\n"
+                "- You must always validate the output of the other Agents before responding to the user.\n"
                 "- Ensure the sub-tasks are ordered correctly, as they will be executed sequentially.\n"
                 "- Do not respond directly; only use tool calls to define the sub-tasks.\n"
                 "\n"

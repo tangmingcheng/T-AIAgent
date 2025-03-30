@@ -10,6 +10,7 @@ from agno.embedder.ollama import OllamaEmbedder
 from agno.vectordb.search import SearchType
 
 from agno.models.groq import Groq
+from agno.models.ollama import Ollama
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.gmail import GmailTools
@@ -22,8 +23,8 @@ from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH
 os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
 os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 
-#task ="Check the latest news on PS5 and then send the collected information by email to 18340825516@163.com"
-task = "Tell me something about ThaiRecipes.pdf "
+task ="Check the latest news on PS5 and then send the collected information by email to 18340825516@163.com"
+#task = "Tell me something about ThaiRecipes.pdf from knowledge base"
 
 # Create a storage backend using the Sqlite database
 storage = SqliteAgentStorage(
@@ -34,7 +35,8 @@ storage = SqliteAgentStorage(
 )
 
 # Create Groq model
-model=Groq(id='qwen-qwq-32b',timeout=60)
+#model=Groq(id='qwen-qwq-32b',timeout=60)
+model=Ollama(id='qwen2.5:14b')
 
 # Set GmailTools
 gmail_tools=GmailTools(
@@ -58,7 +60,7 @@ embedder = OllamaEmbedder(id="nomic-embed-text", dimensions=768)
 
 # 构建知识库
 url_pdf_knowledge_base = PDFUrlKnowledgeBase(
-    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    #urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
     vector_db=PgVector(
         table_name="pdf_documents",
         db_url="postgresql+psycopg://ai:ai@localhost:5532/ai",
@@ -68,7 +70,7 @@ url_pdf_knowledge_base = PDFUrlKnowledgeBase(
 )
 
 website_knowledge_base = WebsiteKnowledgeBase(
-    urls=["https://docs.agno.com/tools/toolkits/website"],
+    #urls=["https://docs.agno.com/tools/toolkits/website"],
     max_depth=1,
     max_links=1,
     vector_db=PgVector(
@@ -80,7 +82,7 @@ website_knowledge_base = WebsiteKnowledgeBase(
 )
 
 local_pdf_knowledge_base = PDFKnowledgeBase(
-    path="D:/Chrome/Downloads/ThaiRecipes.pdf",
+    path="D:/Chrome/Downloads/test.pdf",
     reader=PDFReader(chunk=True),
     vector_db=PgVector(
         table_name="pdf_documents",
@@ -109,6 +111,7 @@ web_agent = Agent(
     instructions="Always include sources",
     show_tool_calls=True,
     markdown=True,
+    debug_mode=True,
 )
 
 finance_agent = Agent(
@@ -119,6 +122,7 @@ finance_agent = Agent(
     instructions="Use tables to display data",
     show_tool_calls=True,
     markdown=True,
+    debug_mode=True,
 )
 
 email_agent = Agent(
@@ -132,6 +136,7 @@ email_agent = Agent(
     ],
     show_tool_calls=True,
     markdown=True,
+    debug_mode=True,
 )
 
 knowledge_agent = Agent(
@@ -150,6 +155,7 @@ knowledge_agent = Agent(
     search_knowledge=True,     # 启用知识库搜索
     show_tool_calls=True,
     markdown=True,
+    debug_mode=True,
 )
 
 agent_team = Team(
@@ -163,17 +169,36 @@ agent_team = Team(
         "Each task should correspond to one action mentioned in the user's input, and each action should be a single step.",
         "Ensure the steps are logically ordered and easy to follow."
     ],
+    show_members_responses=True,
     show_tool_calls=True,
     markdown=True,
     debug_mode=True,
     storage=storage,
     share_member_interactions=True,
     enable_team_history=True,
-    num_of_interactions_from_history=5,
+    num_of_interactions_from_history=3,
     add_datetime_to_instructions=True,
 )
 
 if knowledge_agent.knowledge is not None:
-    knowledge_agent.knowledge.load(recreate=True, upsert=True)
+    knowledge_agent.knowledge.load(recreate=False, upsert=True)
 
-agent_team.print_response(task, stream=True)
+#agent_team.print_response(task, stream=True)
+
+def get_team_components():
+    return agent_team, knowledge_agent, local_pdf_knowledge_base
+
+def respond():
+    print("🤖 T-AIAgent：输入 'exit' 退出对话。")
+    while True:
+        print(f'\n')
+        user_input = input("💬 请输入你的问题: ")
+        if user_input.lower() in ["exit", "退出"]:
+            print("🔚 结束对话。")
+            break
+        agent_team.print_response(user_input, stream=False)
+
+
+# 测试模式
+if __name__ == "__main__":
+    respond()
