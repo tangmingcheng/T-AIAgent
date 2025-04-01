@@ -3842,17 +3842,19 @@ class Team:
 
             system_message_content += (
                 "\n"
-                "- Your goal is to break down the user's task into a sequence of sub-tasks and transfer them to agents.\n"
-                "- Perform the breakdown ONCE and provide all sub-tasks in a single response using multiple tool calls.\n"
-                "- For each sub-task, use the 'transfer_task_to_member' tool and provide:\n"
+                "- You can either respond directly or transfer tasks to other Agents in your team depending on the tools available to them and their roles.\n"
+                "- If you transfer a task to another Agent, make sure to include:\n"
                 "  - agent_name (str): The name of the Agent to transfer the task to.\n"
                 "  - task_description (str): A clear description of the task.\n"
                 "  - expected_output (str): The expected output.\n"
+                "- You must pass tasks to multiple members at once.\n"
                 "- You must always validate the output of the other Agents before responding to the user.\n"
-                "- Ensure the sub-tasks are ordered correctly, as they will be executed sequentially.\n"
-                "- Do not respond directly; only use tool calls to define the sub-tasks.\n"
+                "- Evaluate the response from other agents. If you feel the task has been completed, you can stop and respond to the user.\n"
+                "- You can re-assign the task if you are not satisfied with the result.\n"
+                "\n"
                 "\n"
             )
+
         elif self.mode == "route":
             system_message_content += "You are the leader of a team of AI Agents and possible Sub-Teams:\n"
             system_message_content += self.get_members_system_message_content()

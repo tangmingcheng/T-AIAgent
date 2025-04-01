@@ -1,23 +1,26 @@
 import os
+
 from agno.agent import Agent
 from agno.knowledge.combined import CombinedKnowledgeBase
+from agno.models.ollama import Ollama
 from agno.tools.file import FileTools
 from agno.vectordb.pgvector import PgVector
 from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
 from agno.knowledge.website import WebsiteKnowledgeBase
 from agno.knowledge.pdf import PDFKnowledgeBase
 from agno.document.reader.pdf_reader import PDFReader
-from agno.embedder.ollama import OllamaEmbedder
+from agno.embedder.openai import OpenAIEmbedder
 from agno.vectordb.search import SearchType
 
 from agno.models.groq import Groq
+from agno.models.openai import OpenAIChat
 
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.gmail import GmailTools
 from agno.tools.yfinance import YFinanceTools
 
-from agent.team import Team
+from agno.team import Team
 from config.config import TOKEN_PATH, CREDENTIALS_PATH, DB_TEAM_PATH, DOWNLOAD_DIR
 
 # Proxy Server（Clash/V2Ray/Trojan port）
@@ -57,7 +60,7 @@ gmail_tools=GmailTools(
 )
 
 # 初始化嵌入器
-embedder = OllamaEmbedder(id="nomic-embed-text", dimensions=768)
+embedder = OpenAIEmbedder()
 
 # 构建知识库
 url_pdf_knowledge_base = PDFUrlKnowledgeBase(
@@ -83,7 +86,7 @@ website_knowledge_base = WebsiteKnowledgeBase(
 )
 
 local_pdf_knowledge_base = PDFKnowledgeBase(
-    path="D:/Chrome/Downloads/test.pdf",
+    path="D:/Chrome/Downloads/ThaiRecipes.pdf",
     reader=PDFReader(chunk=True),
     vector_db=PgVector(
         table_name="pdf_documents",
@@ -109,11 +112,7 @@ web_agent = Agent(
     role="Search the web for information",
     model=model,
     tools=[DuckDuckGoTools()],
-    instructions=[
-        "Always include sources",
-        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
-        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
-    ],
+    instructions=["Always include sources",],
     show_tool_calls=True,
     markdown=True,
     debug_mode=True,
@@ -138,9 +137,6 @@ email_agent = Agent(
     instructions=[
         "You can use GmailTools to perform email operations",
         "You can read the latest emails, unread emails, search emails, send emails, create drafts, and reply to emails",
-        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
-        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
-
     ],
     show_tool_calls=True,
     markdown=True,
@@ -150,19 +146,16 @@ email_agent = Agent(
 knowledge_agent = Agent(
     name="Knowledge Agent",
     role="Responsible for querying the knowledge base and returning relevant content",
-    model=model,
-    tools=[],
+    model=Ollama(id='qwen2.5:14b'),
     instructions=[
         "You are responsible for querying and retrieving information from the knowledge base.",
         "Use the provided knowledge base to answer questions or provide detailed information.",
         "If the requested information is not in the knowledge base, inform the user and suggest expanding the knowledge base.",
         "Present information in a clear and structured manner, using markdown formatting.",
-        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
-        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
     ],
-    knowledge=knowledge_base,  # 绑定组合知识库
-    update_knowledge=False,    # 只查询，不更新
-    search_knowledge=True,     # 启用知识库搜索
+    knowledge=knowledge_base,
+    update_knowledge=False,
+    search_knowledge=True,
     show_tool_calls=True,
     markdown=True,
     debug_mode=True,
@@ -171,13 +164,9 @@ knowledge_agent = Agent(
 file_agent = Agent(
     name="File Agent",
     role="Responsible for local files management",
-    model=model,
-    tools=[FileTools(base_dir=DOWNLOAD_DIR),
-    ],
-
-    instructions=[
-        "You can use FileTools to read and write files on the local file system",
-    ],
+    model=OpenAIChat("gpt-4o-mini"),
+    tools=[FileTools(base_dir=DOWNLOAD_DIR),],
+    instructions=["You can use FileTools to read and write files on the local file system",],
     show_tool_calls=True,
     markdown=True,
     debug_mode= True,
@@ -187,14 +176,17 @@ agent_team = Team(
     members=[web_agent, finance_agent,email_agent,knowledge_agent,file_agent],
     name="Multitasking Team",
     mode="coordinate",
-    model=model,
+    model=OpenAIChat("gpt-4o"),
+    description="You are a personal assistant who can lead the team to answer user questions and handle various matters",
     instructions=[
-        "Analyze the user's input and break it down into simple steps based on natural language logic.",
-        "Do not modify the user's input, simply divide it into distinct tasks as they are presented in the original request.",
-        "Each task should correspond to one action mentioned in the user's input, and each action should be a single step.",
-        "Ensure the steps are logically ordered and easy to follow.",
-        "Do not include any escape characters in your response, keep the strings clean and unmodified.",
-        "Ensure that no escape characters (e.g., '\\', '\n', '\r') are used in any of the strings. This is critical to avoid breaking the message formatting and causing potential errors in future responses."
+        "If you need to search for real-time information, hand it over to the Web Agent in the team.\n",
+        "If you want to analyze financial data, hand it over to the Finance Agent in the team.\n",
+        "If the user wants to manage emails, such as reading or sending emails, delegate to the Email Agent.\n",
+        "If the task involves querying or retrieving knowledge from PDFs, websites, or other sources, delegate to the Knowledge Agent.\n",
+        "If the task involves reading or writing local files, delegate to the File Agent.\n",
+        "You are the coordinator. Split the task as needed and integrate the results from each agent.\n",
+        "Always provide the final answer in a clear and helpful way, using markdown formatting.\n",
+        "You can call multiple agents if necessary and then summarize their responses.\n",
     ],
     show_members_responses=True,
     show_tool_calls=True,
@@ -223,7 +215,7 @@ def respond():
         if user_input.lower() in ["exit", "退出"]:
             print("🔚 结束对话。")
             break
-        agent_team.print_response(user_input, stream=False)
+        agent_team.print_response(user_input, stream=True)
 
 
 # 测试模式
