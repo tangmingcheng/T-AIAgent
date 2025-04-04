@@ -52,7 +52,6 @@ with st.sidebar:
 
             local_pdf_knowledge_base.path = tmp_path
             local_pdf_knowledge_base.load(recreate=False, upsert=True)
-            knowledge_agent.knowledge.load(recreate=False, upsert=True)
             st.success(f"✅ {uploaded_file.name} 已加入知识库")
             os.remove(tmp_path)  # 清理临时文件
 
