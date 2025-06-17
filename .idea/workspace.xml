@@ -4,14 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16bfb83-fe98-4c49-8d1a-27beba458748" name="更改" comment="" />
+    <list default="true" id="f16bfb83-fe98-4c49-8d1a-27beba458748" name="更改" comment="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/ai_agent_task_team.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/ai_agent_task_team.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge/pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/knowledge/pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -25,32 +50,89 @@
     &quot;accountId&quot;: &quot;1e934b5e-0bb7-47f2-a6af-9b0ff4036888&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/agent/agent.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2tdIedFmBvMCmXKaQdcTDX2Rlz0" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "正在变基 master",
-    "ignore.virus.scanning.warn.message": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.agent_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_agno.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_concurrent.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_groq_tools.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_ollama_tools.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_openai.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.ai_agent_rag.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_rag_agno.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_rag_phidata.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_task.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_task_team.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_team.executor&quot;: &quot;ConcurrencyExecutor&quot;,
+    &quot;Python.ai_agent_team_agno.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ai_agent_tools.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app_rag.executor&quot;: &quot;Run&quot;,
+    &quot;Python.catch_coins_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.email_tool_agno.executor&quot;: &quot;Run&quot;,
+    &quot;Python.googlesearch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.groq.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.groq_llm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.groq_mock.executor&quot;: &quot;Run&quot;,
+    &quot;Python.image_agent.executor&quot;: &quot;Run&quot;,
+    &quot;Python.oauth_gmail.executor&quot;: &quot;Run&quot;,
+    &quot;Python.snake_game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.team.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_gmail.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_groq.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vision_agent.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/T-AIAgent/streamlit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects\T-AIAgent\agent" />
+      <recent name="D:\PycharmProjects\T-AIAgent" />
+      <recent name="D:\PycharmProjects\T-AIAgent\streamlit" />
+      <recent name="D:\PycharmProjects\T-AIAgent\config" />
+      <recent name="D:\PycharmProjects\T-AIAgent\tools" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PY-251.25410.159" />
+        <option value="bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\ROG\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
       <changelist id="f16bfb83-fe98-4c49-8d1a-27beba458748" name="更改" comment="" />
@@ -58,7 +140,327 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740675620973</updated>
+      <workItem from="1742206903835" duration="6559000" />
+      <workItem from="1742214114804" duration="8366000" />
+      <workItem from="1742303268724" duration="9041000" />
+      <workItem from="1742385523475" duration="1773000" />
+      <workItem from="1742612590721" duration="225000" />
+      <workItem from="1742612837106" duration="28974000" />
+      <workItem from="1742643401823" duration="110000" />
+      <workItem from="1742643535942" duration="8338000" />
+      <workItem from="1742900997386" duration="1907000" />
+      <workItem from="1743219454633" duration="42095000" />
+      <workItem from="1743311197155" duration="29873000" />
+      <workItem from="1743425395174" duration="9727000" />
+      <workItem from="1743437793954" duration="4870000" />
+      <workItem from="1743502503373" duration="2343000" />
+      <workItem from="1743505736413" duration="6582000" />
+      <workItem from="1743753532337" duration="13126000" />
+      <workItem from="1744028322332" duration="244000" />
+      <workItem from="1744456413064" duration="1381000" />
+      <workItem from="1744805791816" duration="311000" />
+      <workItem from="1744806197613" duration="406000" />
+      <workItem from="1744856471416" duration="830000" />
+      <workItem from="1744857890875" duration="56000" />
+      <workItem from="1744862190862" duration="289000" />
+      <workItem from="1744862664063" duration="1205000" />
+      <workItem from="1744874725350" duration="997000" />
+      <workItem from="1744877187313" duration="822000" />
+      <workItem from="1744947460486" duration="172000" />
+      <workItem from="1744947644409" duration="11000" />
+      <workItem from="1745400206072" duration="1166000" />
+      <workItem from="1746871187561" duration="92000" />
+      <workItem from="1747988459664" duration="294000" />
+      <workItem from="1747988766237" duration="580000" />
+      <workItem from="1747989425653" duration="1315000" />
+      <workItem from="1748317453993" duration="1300000" />
+      <workItem from="1748325464524" duration="10000" />
+      <workItem from="1748999231158" duration="1947000" />
+      <workItem from="1749002589941" duration="5000" />
+      <workItem from="1749008231073" duration="2007000" />
+      <workItem from="1749193265952" duration="596000" />
     </task>
+    <task id="LOCAL-00001" summary="Increase RAG and adapt to groq api">
+      <option name="closed" value="true" />
+      <created>1741531139627</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741531139627</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Increase phidata &gt;&gt; agno">
+      <option name="closed" value="true" />
+      <created>1741632103040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741632103040</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Modify project structure and add multi-task agent">
+      <option name="closed" value="true" />
+      <created>1742138360696</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742138360696</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Modify project structure and add combine knowledge base">
+      <option name="closed" value="true" />
+      <created>1742217067346</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742217067346</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add File tools to write and read file">
+      <option name="closed" value="true" />
+      <created>1742223601863</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742223601863</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add WebsiteTools,fixed the issue that when using agno's CombinedKnowledgeBase, calling WebsiteTools again fails to update the Knowledge Base of CombinedKnowledgeBase">
+      <option name="closed" value="true" />
+      <created>1742312371574</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742312371574</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add vision agent">
+      <option name="closed" value="true" />
+      <created>1742651936439</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742651936439</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Modify the implementation logic of team in coordinate mode in agno to split the tasks into one-time and execute them in a loop">
+      <option name="closed" value="true" />
+      <created>1742652056315</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742652056315</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Use the modified team to manage multiple agents to facilitate multi-modal input expansion">
+      <option name="closed" value="true" />
+      <created>1742652154304</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742652154304</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added Team type database">
+      <option name="closed" value="true" />
+      <created>1743228200367</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1743228200367</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update the agno version and keep the system prompt words of the leader in the team in the custom coordinate mode of the previous version">
+      <option name="closed" value="true" />
+      <created>1743228287643</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1743228287643</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added a display interface based on streamlit">
+      <option name="closed" value="true" />
+      <created>1743236166806</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743236166806</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Increase the concurrency capability of AI agent and the corresponding test code">
+      <option name="closed" value="true" />
+      <created>1743336311264</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1743336311264</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Use Groq">
+      <option name="closed" value="true" />
+      <created>1743336397987</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1743336397987</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add file management tools">
+      <option name="closed" value="true" />
+      <created>1743341139708</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1743341139708</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Using OpenAI's GPT-4O model">
+      <option name="closed" value="true" />
+      <created>1743512339490</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1743512339490</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent">
+      <option name="closed" value="true" />
+      <created>1743766995396</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1743766995396</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Increase RAG and adapt to groq api" />
+    <MESSAGE value="Increase phidata &gt;&gt; agno" />
+    <MESSAGE value="Modify project structure and add multi-task agent" />
+    <MESSAGE value="Modify project structure and add combine knowledge base" />
+    <MESSAGE value="add File tools to write and read file" />
+    <MESSAGE value="add WebsiteTools,fixed the issue that when using agno's CombinedKnowledgeBase, calling WebsiteTools again fails to update the Knowledge Base of CombinedKnowledgeBase" />
+    <MESSAGE value="add vision agent" />
+    <MESSAGE value="Modify the implementation logic of team in coordinate mode in agno to split the tasks into one-time and execute them in a loop" />
+    <MESSAGE value="Use the modified team to manage multiple agents to facilitate multi-modal input expansion" />
+    <MESSAGE value="Added Team type database" />
+    <MESSAGE value="Update the agno version and keep the system prompt words of the leader in the team in the custom coordinate mode of the previous version" />
+    <MESSAGE value="Added a display interface based on streamlit" />
+    <MESSAGE value="Increase the concurrency capability of AI agent and the corresponding test code" />
+    <MESSAGE value="Use Groq" />
+    <MESSAGE value="Add file management tools" />
+    <MESSAGE value="Using OpenAI's GPT-4O model" />
+    <MESSAGE value="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models/groq_mock.py</url>
+          <line>107</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/groq/_client.py</url>
+          <line>370</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/tools/gmail.py</url>
+          <line>211</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>1923</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>3797</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>4003</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>918</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>891</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>868</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>4537</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>644</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/team.py</url>
+          <line>3886</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/base.py</url>
+          <line>311</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/groq/groq.py</url>
+          <line>262</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/base.py</url>
+          <line>313</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/agent/ai_agent_openai.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/knowledge/combined.py</url>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/T_AIAgent$vision_agent.coverage" NAME="vision_agent 覆盖结果" MODIFIED="1742621038156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$oauth_gmail.coverage" NAME="oauth_gmail 覆盖结果" MODIFIED="1747988964454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_test.coverage" NAME="ai_agent_test 覆盖结果" MODIFIED="1743227316802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$groq.coverage" NAME="groq 覆盖结果" MODIFIED="1743330359434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/groq" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_concurrent.coverage" NAME="ai_agent_concurrent 覆盖结果" MODIFIED="1743325585934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_task_team.coverage" NAME="ai_agent_task_team 覆盖结果" MODIFIED="1747990707571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$config.coverage" NAME="config 覆盖结果" MODIFIED="1742218715887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/config" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_team.coverage" NAME="ai_agent_team 覆盖结果" MODIFIED="1742643470383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_team_agno.coverage" NAME="ai_agent_team_agno 覆盖结果" MODIFIED="1742624635406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$team.coverage" NAME="team 覆盖结果" MODIFIED="1743256758857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_task.coverage" NAME="ai_agent_task 覆盖结果" MODIFIED="1743434203903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$agent_test.coverage" NAME="agent_test 覆盖结果" MODIFIED="1742646007863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_ollama_tools.coverage" NAME="ai_agent_ollama_tools 覆盖结果" MODIFIED="1744863344106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$test_gmail.coverage" NAME="test_gmail 覆盖结果" MODIFIED="1747989053589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$snake_game.coverage" NAME="snake_game 覆盖结果" MODIFIED="1744457150395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tmp" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$image_agent.coverage" NAME="image_agent 覆盖结果" MODIFIED="1743762931070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_openai.coverage" NAME="ai_agent_openai 覆盖结果" MODIFIED="1743505759232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$catch_coins_game.coverage" NAME="catch_coins_game 覆盖结果" MODIFIED="1745400455849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tmp" />
   </component>
 </project>

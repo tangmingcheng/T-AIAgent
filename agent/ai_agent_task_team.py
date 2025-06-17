@@ -71,7 +71,7 @@ shared_vector_db = PgVector(
 
 # Create knowledgebase
 url_pdf_knowledge_base = PDFUrlKnowledgeBase(
-    #urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
+    urls=["https://agno-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
     vector_db=shared_vector_db,
 )
 
@@ -84,7 +84,7 @@ website_knowledge_base = WebsiteKnowledgeBase(
 
 local_pdf_knowledge_base = PDFKnowledgeBase(
     #path="D:/Chrome/Downloads/ThaiRecipes.pdf",
-    reader=PDFReader(chunk=True),
+    reader=PDFReader(),
     vector_db=shared_vector_db,
 )
 
@@ -150,7 +150,7 @@ knowledge_agent = Agent(
 file_agent = Agent(
     name="File Agent",
     role="Responsible for local files management",
-    model=OpenAIChat("gpt-4o-mini"),
+    model=OpenAIChat("gpt-4o"),
     tools=[FileTools(base_dir=DOWNLOAD_DIR),],
     instructions=["You can use FileTools to read and write files on the local file system",],
     show_tool_calls=True,

@@ -84,5 +84,4 @@ class PDFKnowledgeBase(AgentKnowledge):
             recreate=recreate,
             upsert=upsert,
             skip_existing=skip_existing,
-            filters=filters,
         )
