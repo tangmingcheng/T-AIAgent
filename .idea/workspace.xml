@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16bfb83-fe98-4c49-8d1a-27beba458748" name="更改" comment="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent">
+      <change beforePath="$PROJECT_DIR$/.idea/T-AIAgent.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/T-AIAgent.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agent/ai_agent_task_team.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/ai_agent_task_team.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/knowledge/pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/knowledge/pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/team.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/vision_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/vision_agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge/pdf.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,53 +68,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.agent_test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_agno.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_concurrent.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_groq_tools.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_ollama_tools.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_openai.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.ai_agent_rag.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_rag_agno.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_rag_phidata.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_task.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_task_team.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_team.executor&quot;: &quot;ConcurrencyExecutor&quot;,
-    &quot;Python.ai_agent_team_agno.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ai_agent_tools.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app_rag.executor&quot;: &quot;Run&quot;,
-    &quot;Python.catch_coins_game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.email_tool_agno.executor&quot;: &quot;Run&quot;,
-    &quot;Python.googlesearch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.groq.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.groq_llm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.groq_mock.executor&quot;: &quot;Run&quot;,
-    &quot;Python.image_agent.executor&quot;: &quot;Run&quot;,
-    &quot;Python.oauth_gmail.executor&quot;: &quot;Run&quot;,
-    &quot;Python.snake_game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.team.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_gmail.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_groq.executor&quot;: &quot;Run&quot;,
-    &quot;Python.vision_agent.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/T-AIAgent/streamlit&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.agent_test.executor": "Run",
+    "Python.ai_agent_agno.executor": "Run",
+    "Python.ai_agent_concurrent.executor": "Run",
+    "Python.ai_agent_groq_tools.executor": "Run",
+    "Python.ai_agent_ollama_tools.executor": "Run",
+    "Python.ai_agent_openai.executor": "Debug",
+    "Python.ai_agent_rag.executor": "Run",
+    "Python.ai_agent_rag_agno.executor": "Run",
+    "Python.ai_agent_rag_phidata.executor": "Run",
+    "Python.ai_agent_task.executor": "Run",
+    "Python.ai_agent_task_team.executor": "Run",
+    "Python.ai_agent_team.executor": "ConcurrencyExecutor",
+    "Python.ai_agent_team_agno.executor": "Run",
+    "Python.ai_agent_test.executor": "Run",
+    "Python.ai_agent_tools.executor": "Run",
+    "Python.app_rag.executor": "Run",
+    "Python.catch_coins_game.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.email_tool_agno.executor": "Run",
+    "Python.googlesearch.executor": "Run",
+    "Python.groq.executor": "Debug",
+    "Python.groq_llm.executor": "Run",
+    "Python.groq_mock.executor": "Run",
+    "Python.image_agent.executor": "Run",
+    "Python.oauth_gmail.executor": "Run",
+    "Python.snake_game.executor": "Run",
+    "Python.team.executor": "Run",
+    "Python.test_gmail.executor": "Run",
+    "Python.test_groq.executor": "Run",
+    "Python.vision_agent.executor": "Run",
+    "Python.watch_frag_vert.executor": "Run",
+    "Python.websocket_ui.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "D:/PycharmProjects/T-AIAgent/streamlit",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PycharmProjects\T-AIAgent\agent" />
@@ -124,8 +130,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PY-251.25410.159" />
-        <option value="bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PY-251.26094.141" />
+        <option value="bundled-python-sdk-9f8e2b94138c-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26094.141" />
       </set>
     </attachedChunks>
   </component>
@@ -179,6 +185,25 @@
       <workItem from="1749002589941" duration="5000" />
       <workItem from="1749008231073" duration="2007000" />
       <workItem from="1749193265952" duration="596000" />
+      <workItem from="1750123671910" duration="988000" />
+      <workItem from="1750124718349" duration="22000" />
+      <workItem from="1750399510396" duration="1466000" />
+      <workItem from="1750407393757" duration="29000" />
+      <workItem from="1750408050670" duration="143000" />
+      <workItem from="1750898796483" duration="202000" />
+      <workItem from="1753333383290" duration="758000" />
+      <workItem from="1753334159770" duration="1726000" />
+      <workItem from="1753346394597" duration="371000" />
+      <workItem from="1753346779070" duration="492000" />
+      <workItem from="1753838516748" duration="30000" />
+      <workItem from="1754009659101" duration="154000" />
+      <workItem from="1755148699910" duration="1233000" />
+      <workItem from="1755162402142" duration="9000" />
+      <workItem from="1758164345668" duration="1142000" />
+      <workItem from="1758165562220" duration="1220000" />
+      <workItem from="1758166873373" duration="7460000" />
+      <workItem from="1758179820915" duration="1475000" />
+      <workItem from="1758181382159" duration="1435000" />
     </task>
     <task id="LOCAL-00001" summary="Increase RAG and adapt to groq api">
       <option name="closed" value="true" />
@@ -316,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743766995396</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Modify the PDF knowledge base to ensure that it can be initialized with an empty path and add an image agent">
+      <option name="closed" value="true" />
+      <created>1750123974962</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1750123974962</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,67 +401,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/tools/gmail.py</url>
-          <line>211</line>
+          <line>204</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>1923</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>3797</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>4003</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>918</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>891</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>868</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>4537</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>644</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/agent/team.py</url>
-          <line>3886</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/base.py</url>
-          <line>311</line>
+          <line>204</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/groq/groq.py</url>
-          <line>262</line>
+          <line>281</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/base.py</url>
-          <line>313</line>
+          <line>206</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -436,20 +424,18 @@
           <line>7</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../Python/Lib/site-packages/agno/knowledge/combined.py</url>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/T_AIAgent$vision_agent.coverage" NAME="vision_agent 覆盖结果" MODIFIED="1742621038156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
-    <SUITE FILE_PATH="coverage/T_AIAgent$oauth_gmail.coverage" NAME="oauth_gmail 覆盖结果" MODIFIED="1747988964454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$vision_agent.coverage" NAME="vision_agent 覆盖结果" MODIFIED="1758165747322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$oauth_gmail.coverage" NAME="oauth_gmail 覆盖结果" MODIFIED="1758181399197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$websocket_ui.coverage" NAME="websocket_ui 覆盖结果" MODIFIED="1755148944096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_test.coverage" NAME="ai_agent_test 覆盖结果" MODIFIED="1743227316802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$groq.coverage" NAME="groq 覆盖结果" MODIFIED="1743330359434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../Python/Lib/site-packages/agno/models/groq" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_concurrent.coverage" NAME="ai_agent_concurrent 覆盖结果" MODIFIED="1743325585934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
-    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_task_team.coverage" NAME="ai_agent_task_team 覆盖结果" MODIFIED="1747990707571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_task_team.coverage" NAME="ai_agent_task_team 覆盖结果" MODIFIED="1758181942521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$watch_frag_vert.coverage" NAME="watch_frag_vert 覆盖结果" MODIFIED="1753347184034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
     <SUITE FILE_PATH="coverage/T_AIAgent$config.coverage" NAME="config 覆盖结果" MODIFIED="1742218715887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/config" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_team.coverage" NAME="ai_agent_team 覆盖结果" MODIFIED="1742643470383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_team_agno.coverage" NAME="ai_agent_team_agno 覆盖结果" MODIFIED="1742624635406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
@@ -457,7 +443,7 @@
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_task.coverage" NAME="ai_agent_task 覆盖结果" MODIFIED="1743434203903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$agent_test.coverage" NAME="agent_test 覆盖结果" MODIFIED="1742646007863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_ollama_tools.coverage" NAME="ai_agent_ollama_tools 覆盖结果" MODIFIED="1744863344106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
-    <SUITE FILE_PATH="coverage/T_AIAgent$test_gmail.coverage" NAME="test_gmail 覆盖结果" MODIFIED="1747989053589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
+    <SUITE FILE_PATH="coverage/T_AIAgent$test_gmail.coverage" NAME="test_gmail 覆盖结果" MODIFIED="1750399702604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$snake_game.coverage" NAME="snake_game 覆盖结果" MODIFIED="1744457150395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tmp" />
     <SUITE FILE_PATH="coverage/T_AIAgent$image_agent.coverage" NAME="image_agent 覆盖结果" MODIFIED="1743762931070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
     <SUITE FILE_PATH="coverage/T_AIAgent$ai_agent_openai.coverage" NAME="ai_agent_openai 覆盖结果" MODIFIED="1743505759232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/agent" />
